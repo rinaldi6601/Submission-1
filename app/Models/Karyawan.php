@@ -13,5 +13,6 @@ class Karyawan extends Model
         'no_induk',
         'nama',
         'tgl_lahir',
+        'alamat'
     ];
 }

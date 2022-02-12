@@ -14,7 +14,8 @@ class KaryawanController extends Controller
      */
     public function index()
     {
-        //
+        $karyawan = Karyawan::all();
+        return view ('karyawan.index', compact('karyawan'));
     }
 
     /**
@@ -24,7 +25,7 @@ class KaryawanController extends Controller
      */
     public function create()
     {
-        
+        return view('karyawan.create');
     }
 
     /**
@@ -38,13 +39,15 @@ class KaryawanController extends Controller
         $request->validate([
             'no_induk',
             'nama',
-            'tgl_lahir'
+            'tgl_lahir',
+            'alamat'
         ]);
 
         Karyawan::create([
             'no_induk',
             'nama',
-            'tgl_lahir'
+            'tgl_lahir',
+            'alamat'
         ]);
 
         return redirect()->route('karyawan.index')
@@ -88,6 +91,7 @@ class KaryawanController extends Controller
             'no_induk' => 'required',
             'nama' => 'required', 
             'tgl_lahir' => 'required', 
+            'alamat' => 'required'
          ]);
                
          $karyawan = Karyawan::find($id)->update($request->all()); 
