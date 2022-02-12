@@ -15,4 +15,6 @@ class Karyawan extends Model
         'tgl_lahir',
         'alamat'
     ];
+    
+    protected $primaryKey = 'id';
 }

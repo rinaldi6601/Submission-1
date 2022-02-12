@@ -75,7 +75,8 @@ class KaryawanController extends Controller
      */
     public function edit(Karyawan $karyawan)
     {
-        $karyawan = Karyawan::where('id', $karyawan)->first();
+        
+        // dd($karyawan);
         return view('karyawan.edit', compact('karyawan'));
     }
 
@@ -106,9 +107,11 @@ class KaryawanController extends Controller
      * @param  \App\Models\Karyawan  $karyawan
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Karyawan $karyawan)
     {
-        $karyawan = Karyawan::find($id);
-        $karyawan->delete();
+        dd($karyawan);
+        // $karyawan->delete();
+        return redirect()->route('karyawan.index')
+        ->with('success', 'Karyawan Berhasil Dihapus');
     }
 }

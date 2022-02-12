@@ -3,8 +3,9 @@
         <h3>Ubah Data Karyawan</h3>
     </div>
     <div class="card-body">
-        <form action="{{ route('karyawan.update') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('karyawan.update',$karyawan->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method("PUT")
             <div class="row mb-3">
                 <div class="col-md-6">
                     <div class="form-floating mb-3 mb-md-0">
