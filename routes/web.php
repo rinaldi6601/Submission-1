@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CutiController;
+use App\Http\Controllers\KaryawanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,5 +22,8 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::resource('karyawan', KaryawanController::class);
+Route::resource('cuti', CutiController::class);
 
 require __DIR__.'/auth.php';
