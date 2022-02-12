@@ -44,10 +44,10 @@ class KaryawanController extends Controller
         ]);
 
         Karyawan::create([
-            'no_induk',
-            'nama',
-            'tgl_lahir',
-            'alamat'
+            'no_induk' => $request->no_induk,
+            'nama'=> $request->nama,
+            'tgl_lahir' => $request->tgl_lahir,
+            'alamat' => $request->alamat
         ]);
 
         return redirect()->route('karyawan.index')
@@ -62,7 +62,7 @@ class KaryawanController extends Controller
      */
     public function show($id)
     {
-        $karyawan = Karyawan::where('id', $id)->first;
+        $karyawan = Karyawan::where('id', $id)->first();
         return view('karyawan.index', compact('karyawan'));
 
     }
@@ -75,7 +75,8 @@ class KaryawanController extends Controller
      */
     public function edit(Karyawan $karyawan)
     {
-        //
+        $karyawan = Karyawan::where('id', $karyawan)->first();
+        return view('karyawan.edit', compact('karyawan'));
     }
 
     /**

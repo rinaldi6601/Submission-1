@@ -1,15 +1,15 @@
 <x-app-layout>
     <div class="card-header">
-        <h3>Tambah Data Karyawan</h3>
+        <h3>Ubah Data Karyawan</h3>
     </div>
     <div class="card-body">
-        <form action="{{ route('karyawan.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('karyawan.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row mb-3">
                 <div class="col-md-6">
                     <div class="form-floating mb-3 mb-md-0">
                         <input class="form-control" name="no_induk" id="no_induk" type="text" placeholder="Masukkan Nomor Induk" />
-                        <label for="no_induk">Nomor Induk</label>
+                        <label for="no_induk">{{ $karyawan->no_induk }}</label>
                     </div>
                 </div>
                 <div class="col-md-6">

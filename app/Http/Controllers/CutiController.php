@@ -14,7 +14,8 @@ class CutiController extends Controller
      */
     public function index()
     {
-        //
+        $cuti = Cuti::all();
+        return view('cuti.index', compact('cuti'));
     }
 
     /**
@@ -24,7 +25,7 @@ class CutiController extends Controller
      */
     public function create()
     {
-        //
+        return view('cuti.create');
     }
 
     /**
@@ -43,10 +44,10 @@ class CutiController extends Controller
         ]);
 
         Cuti::create([
-            'karyawan_id',
-            'tgl_cuti',
-            'lama_cuti',
-            'keterangan'
+            'karyawan_id' => $request->karyawan_id,
+            'tgl_cuti' => $request->tgl_cuti,
+            'lama_cuti' => $request->lama_cuti,
+            'keterangan' => $request->keterangan
         ]);
 
         return redirect()->route('cuti.index')

@@ -8,9 +8,10 @@
                         <tr>
                             <th>Nomor Induk</th>
                             <th>Nama</th>
-                            <th>Allamat</th>
+                            <th>Alamat</th>
                             <th>Tanggal Lahir</th>
                             <th>Tanggal Bergabung</th>
+                            <th style="text-align: center;">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -21,6 +22,17 @@
                                 <td>{{ $item->alamat }}</td>
                                 <td>{{ $item->tgl_lahir }}</td>
                                 <td>{{ $item->created_at }}</td>
+                                <td>
+                                    <a href="{{ route('karyawan.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                                    {{-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal">
+                                        Edit
+                                    </button> --}}
+                                    <form action="{{ route('karyawan.destroy', $item->id) }}">
+                                        @csrf
+                                        @method("DELETE")
+                                        <button class="btn btn-danger" type="submit">Hapus</button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                         
