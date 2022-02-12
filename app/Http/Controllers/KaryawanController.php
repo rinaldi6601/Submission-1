@@ -109,8 +109,7 @@ class KaryawanController extends Controller
      */
     public function destroy(Karyawan $karyawan)
     {
-        dd($karyawan);
-        // $karyawan->delete();
+        $karyawan->delete();
         return redirect()->route('karyawan.index')
         ->with('success', 'Karyawan Berhasil Dihapus');
     }

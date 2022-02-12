@@ -27,7 +27,7 @@
                                     {{-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal">
                                         Edit
                                     </button> --}}
-                                    <form action="{{ route('karyawan.destroy', $item->id) }}">
+                                    <form action="{{ route('karyawan.destroy', $item->id) }}" method="post">
                                         @csrf
                                         @method("DELETE")
                                         <button class="btn btn-danger" type="submit">Hapus</button>
