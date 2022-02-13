@@ -61,21 +61,21 @@ class CutiController extends Controller
         ]);
         $total = Cuti::where('karyawan_id', $request->karyawan_id)->get()->sum('lama_cuti');
 
-        $fdate = $request->Fdate;
-        $ldate = $request->Ldate;
+        $fdate = $request->tgl_cuti;
+        $ldate = $request->akhir_cuti;
         $datetime1 = new DateTime($fdate);
         $datetime2 = new DateTime($ldate);
         $interval = $datetime1->diff($datetime2);
         $days = $interval->format('%a');//now do whatever you like with $days
 
-        dd($days);
+        // dd($days);
 
         if ($total != 12){
             Cuti::create([
                 'karyawan_id' => $request->karyawan_id,
                 'tgl_cuti' => $request->tgl_cuti,
                 'akhir_cuti' => $request->akhir_cuti,
-                'lama_cuti' => $request->lama_cuti,
+                'lama_cuti' => $days,
                 'keterangan' => $request->keterangan
             ]);
             $message = 'Cuti Berhasil Ditambahkan';
