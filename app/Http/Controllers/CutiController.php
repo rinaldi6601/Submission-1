@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cuti;
 use App\Models\Karyawan;
+use DateTime;
 use Illuminate\Http\Request;
 
 class CutiController extends Controller
@@ -56,10 +57,18 @@ class CutiController extends Controller
             'karyawan_id',
             'tgl_cuti',
             'akhir_cuti',
-            'lama_cuti',
             'keterangan'
         ]);
         $total = Cuti::where('karyawan_id', $request->karyawan_id)->get()->sum('lama_cuti');
+
+        $fdate = $request->Fdate;
+        $ldate = $request->Ldate;
+        $datetime1 = new DateTime($fdate);
+        $datetime2 = new DateTime($ldate);
+        $interval = $datetime1->diff($datetime2);
+        $days = $interval->format('%a');//now do whatever you like with $days
+
+        dd($days);
 
         if ($total != 12){
             Cuti::create([

@@ -8,7 +8,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <div class="form-floating mb-3 mb-md-0">
-                        <select class="form-control" name="karyawan_id" id="karyawan" onchange="pilihKaryawan()">
+                        <select class="form-control" name="karyawan_id" id="karyawan1" onchange="pilihKaryawan()">
                             <option value="">-- Pilih Karyawan --</option>
                             @foreach ($karyawan as $item)
                             <option value="{{ $item->id }}">{{ $item->nama }}</option>
@@ -38,10 +38,10 @@
                     </div>
                 </div>
             </div>
-            <div class="form-floating mb-3">
+            {{-- <div class="form-floating mb-3">
                 <input class="form-control" name="lama_cuti" id="lama_cuti" type="text" placeholder="Lama Cuti" />
                 <label for="lama_cuti">Lama Cuti</label>
-            </div>
+            </div> --}}
             <div class="form-floating mb-3">
                 <input class="form-control" name="keterangan" id="keterangan" type="text" placeholder="Masukkan Keterangan" />
                 <label for="keterangan">Keterangan</label>
@@ -57,7 +57,7 @@
     @push('scripts')
         <script>
             function pilihKaryawan() {
-                var id = $('#karyawan').val();
+                var id = $('#karyawan1').val();
                 console.log(id);
                 $.ajax({
                     url: '{{ route('getKaryawan') }}',
@@ -68,7 +68,6 @@
                     success: function(response) {
                         console.log(response)
                         $('#no_induk').val(response.no_induk);
-
                     }
                 });
             }

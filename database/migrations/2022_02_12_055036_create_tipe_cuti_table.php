@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('tipe_cuti', function (Blueprint $table) {
             $table->id();
             $table->foreignId("karyawan_id")->constrained("karyawan")->onDelete("cascade")->onUpdate("cascade");
-            $table->string('tgl_cuti');
-            $table->string('akhir_cuti');
+            $table->date('tgl_cuti');
+            $table->date('akhir_cuti');
             $table->integer('lama_cuti');
             $table->string('keterangan');
             $table->timestamps();
