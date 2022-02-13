@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId("karyawan_id")->constrained("karyawan")->onDelete("cascade")->onUpdate("cascade");
             $table->string('tgl_cuti');
-            $table->string('lama_cuti');
+            $table->string('akhir_cuti');
+            $table->integer('lama_cuti');
             $table->string('keterangan');
             $table->timestamps();
         });

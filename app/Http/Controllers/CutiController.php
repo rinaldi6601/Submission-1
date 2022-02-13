@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cuti;
+use App\Models\Karyawan;
 use Illuminate\Http\Request;
 
 class CutiController extends Controller
@@ -18,6 +19,19 @@ class CutiController extends Controller
         return view('cuti.index', compact('cuti'));
     }
 
+    public function index2()
+    {
+        // $cuti = Cuti::;
+        $idKaryawan = Cuti::groupby('karyawan_id')
+        ->selectRaw('count(karyawan_id) as total, karyawan_id')->get();
+        $total = $idKaryawan->filter(function ($value, $key) {
+            // dd($value);
+            return $value->total > 2;
+        });
+        dd($idKaryawan, $total[1]->karyawan, $total[1]->karyawan->cuti);
+        return view('cuti.index2', compact('total'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -25,7 +39,9 @@ class CutiController extends Controller
      */
     public function create()
     {
-        return view('cuti.create');
+        $karyawan = Karyawan::all();
+        // dd($karyawan);
+        return view('cuti.create', compact('karyawan'));
     }
 
     /**
@@ -39,19 +55,28 @@ class CutiController extends Controller
         $request->validate([
             'karyawan_id',
             'tgl_cuti',
+            'akhir_cuti',
             'lama_cuti',
             'keterangan'
         ]);
+        $total = Cuti::where('karyawan_id', $request->karyawan_id)->get()->sum('lama_cuti');
 
-        Cuti::create([
-            'karyawan_id' => $request->karyawan_id,
-            'tgl_cuti' => $request->tgl_cuti,
-            'lama_cuti' => $request->lama_cuti,
-            'keterangan' => $request->keterangan
-        ]);
-
+        if ($total != 12){
+            Cuti::create([
+                'karyawan_id' => $request->karyawan_id,
+                'tgl_cuti' => $request->tgl_cuti,
+                'akhir_cuti' => $request->akhir_cuti,
+                'lama_cuti' => $request->lama_cuti,
+                'keterangan' => $request->keterangan
+            ]);
+            $message = 'Cuti Berhasil Ditambahkan';
+        }
+        else{
+            $message = 'Kuota Cuti Sudah Penuh!!';
+        }
+        
         return redirect()->route('cuti.index')
-            ->with('success', 'Cuti Berhasil Ditambahkan');
+            ->with('success', $message);
     }
 
     /**
@@ -89,6 +114,7 @@ class CutiController extends Controller
         $request->validate([
             'karyawan_id' => 'required',
             'tgl_cuti' => 'required', 
+            'akhir_cuti' => 'required', 
             'lama_cuti' => 'required', 
             'keterangan' => 'required', 
          ]);

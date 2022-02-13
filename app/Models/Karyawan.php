@@ -17,4 +17,9 @@ class Karyawan extends Model
     ];
     
     protected $primaryKey = 'id';
+
+    public function cuti()
+    {
+        return $this->hasMany(Cuti::class, 'karyawan_id', 'id');
+    }
 }

@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Data Cuti Karyawan</h1>
+        <h3 class="mt-4">Data Cuti Karyawan Lebih dari 2 Kali</h3>
         <div class="card mb-4">
             <div class="card-body">
                 <table id="datatablesSimple">
@@ -10,19 +10,21 @@
                             <th>Nama</th>
                             <th>Tanggal Mulai Cuti</th>
                             <th>Tanggal Akhir Cuti</th>
+                            <th>Total Pengambilan Cuti</th>
                             <th>Lama Cuti</th>
                             <th>Keterangan</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($cuti as $item)
+                        @foreach ($total as $item)
                             <tr>
                                 <td>{{ $item->karyawan->no_induk }}</td>
                                 <td>{{ $item->karyawan->nama }}</td>
-                                <td>{{ $item->tgl_cuti }}</td>
-                                <td>{{ $item->akhir_cuti }}</td>
-                                <td>{{ $item->lama_cuti }}</td>
-                                <td>{{ $item->keterangan }}</td>
+                                <td>{{ $item->karyawan->cuti->tgl_cuti }}</td>
+                                <td>{{ $item->karyawan->cuti->akhir_cuti }}</td>
+                                <td>2 Kali</td>
+                                <td>{{ $item->karyawan->cuti->lama_cuti }}</td>
+                                <td>{{ $item->karyawan->cuti->keterangan }}</td>
                             </tr>
                         @endforeach
                         

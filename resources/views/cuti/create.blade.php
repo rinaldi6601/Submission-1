@@ -8,14 +8,19 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <div class="form-floating mb-3 mb-md-0">
-                        <input class="form-control" name="karyawan_id" id="karyawan_id" type="text" placeholder="Masukkan Nomor Induk" />
-                        <label for="karyawan_id">Nomor Induk</label>
+                        <select class="form-control" name="karyawan_id" id="karyawan_id">
+                            <option value="">-- Pilih Karyawan --</option>
+                            @foreach ($karyawan as $item)
+                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                            @endforeach
+                        </select>
+                        <label for="karyawan_id">Nama Lengkap</label>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input class="form-control" name="nama" id="nama" type="text" placeholder="Masukkan Nama Lengkap" />
-                        <label for="nama">Nama Lengkap</label>
+                        <input class="form-control" value="" name="no_induk" id="no_induk" type="text" placeholder="Masukkan Nomor Induk" />
+                        <label for="no_induk">Nomor Induk</label>
                     </div>
                 </div>
             </div>

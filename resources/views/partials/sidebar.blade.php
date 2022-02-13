@@ -27,6 +27,7 @@
             <div class="collapse" id="cuti" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
                     <a class="nav-link" href="{{ route('cuti.index') }}">Data Cuti Karyawan</a>
+                    <a class="nav-link" href="{{ route('index2') }}">Data Cuti Lebih Dari 1 Kali</a>
                     <a class="nav-link" href="{{ route('cuti.create') }}">Tambah Cuti Karyawan</a>
                 </nav>
             </div>
