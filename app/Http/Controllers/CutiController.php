@@ -24,12 +24,13 @@ class CutiController extends Controller
     {
         // $cuti = Cuti::;
         $idKaryawan = Cuti::groupby('karyawan_id')
-        ->selectRaw('count(karyawan_id) as total, karyawan_id')->get();
+        ->selectRaw('count(karyawan_id) as total, karyawan_id, sum(lama_cuti) as lama_cuti')->get();
         $total = $idKaryawan->filter(function ($value, $key) {
             // dd($value);
-            return $value->total > 2;
+            return $value->total > 1;
         });
-        dd($idKaryawan, $total[1]->karyawan, $total[1]->karyawan->cuti);
+
+        // dd($idKaryawan, $total[2]->karyawan, $total[2]->karyawan->cuti, $total);
         return view('cuti.index2', compact('total'));
     }
 
@@ -59,7 +60,9 @@ class CutiController extends Controller
             'akhir_cuti',
             'keterangan'
         ]);
-        $total = Cuti::where('karyawan_id', $request->karyawan_id)->get()->sum('lama_cuti');
+        
+        $total = Cuti::where('karyawan_id', $request->karyawan_id)->whereYear('tgl_cuti',now()->year)->get();
+        // dd($total); 
 
         $fdate = $request->tgl_cuti;
         $ldate = $request->akhir_cuti;
@@ -68,9 +71,10 @@ class CutiController extends Controller
         $interval = $datetime1->diff($datetime2);
         $days = $interval->format('%a');//now do whatever you like with $days
 
-        // dd($days);
+        // dd($total->sum('lama_cuti')); 
 
-        if ($total != 12){
+        $akhir = (int)$total->sum('lama_cuti') + (int)$days;
+        if ($akhir < 13){  //ada variabel lagi yg nambah $days + $total
             Cuti::create([
                 'karyawan_id' => $request->karyawan_id,
                 'tgl_cuti' => $request->tgl_cuti,
@@ -79,13 +83,16 @@ class CutiController extends Controller
                 'keterangan' => $request->keterangan
             ]);
             $message = 'Cuti Berhasil Ditambahkan';
+            return redirect()->route('cuti.index')
+            ->with('success', $message);
         }
         else{
             $message = 'Kuota Cuti Sudah Penuh!!';
-        }
-        
-        return redirect()->route('cuti.index')
-            ->with('success', $message);
+            return redirect()->route('cuti.index')
+            ->with('error', $message);
+        } 
+        // return redirect()->route('cuti.index')
+        //     ->with('success', $message);
     }
 
     /**
@@ -145,9 +152,19 @@ class CutiController extends Controller
      * @param  \App\Models\Cuti  $cuti
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Cuti $cuti)
     {
-        $cuti = Cuti::find($id);
         $cuti->delete();
+        return redirect()->route('cuti.index')
+        ->with('success', 'Cuti Berhasil Dihapus');
+    }
+
+    public function destroy2(Cuti $cuti)
+    {
+        // dd($karyawan);
+        // $del = Karyawan::find($karyawan);
+        $cuti->delete();
+        return redirect()->route('karyawan.index')
+        ->with('success', 'Karyawan Berhasil Dihapus');
     }
 }
