@@ -8,7 +8,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <div class="form-floating mb-3 mb-md-0">
-                        <select class="form-control" name="karyawan_id" id="karyawan_id">
+                        <select class="form-control" name="karyawan_id" id="karyawan" onchange="pilihKaryawan()">
                             <option value="">-- Pilih Karyawan --</option>
                             @foreach ($karyawan as $item)
                             <option value="{{ $item->id }}">{{ $item->nama }}</option>
@@ -53,4 +53,25 @@
             </div>
         </form>
     </div>
+
+    @push('scripts')
+        <script>
+            function pilihKaryawan() {
+                var id = $('#karyawan').val();
+                console.log(id);
+                $.ajax({
+                    url: '{{ route('getKaryawan') }}',
+                    type: 'get',
+                    data: {
+                        id: id
+                    },
+                    success: function(response) {
+                        console.log(response)
+                        $('#no_induk').val(response.no_induk);
+
+                    }
+                });
+            }
+        </script>
+    @endpush
 </x-app-layout>

@@ -91,6 +91,12 @@ class CutiController extends Controller
         return view('cuti.index', compact('cuti'));
     }
 
+    public function getKaryawan(Request $request)
+    {
+        $data = Karyawan::find($request->id);
+        return $data;
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

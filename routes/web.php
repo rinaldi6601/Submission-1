@@ -28,6 +28,7 @@ Route::resource('karyawan', KaryawanController::class);
 
 // Route Cuti
 Route::resource('cuti', CutiController::class);
+Route::get('get-karyawan', [CutiController::class, 'getKaryawan'])->name('getKaryawan');
 
 // Route Index Cuti 2 kali
 Route::get('banyak-cuti', [CutiController::class, 'index2'])->name('index2');
