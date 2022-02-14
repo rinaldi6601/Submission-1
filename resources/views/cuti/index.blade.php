@@ -38,7 +38,7 @@
                                 <td>{{ $item->lama_cuti }}</td>
                                 <td>{{ $item->keterangan }}</td>
                                 <td>
-                                    <a href="{{ route('karyawan.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                                    <a href="{{ route('cuti.edit', $item->id) }}" class="btn btn-warning">Edit</a>
                                     {{-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal">
                                         Edit
                                     </button> --}}

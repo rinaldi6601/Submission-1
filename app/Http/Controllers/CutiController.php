@@ -119,9 +119,12 @@ class CutiController extends Controller
      * @param  \App\Models\Cuti  $cuti
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cuti $cuti)
+    public function edit($id)
     {
-        //
+        $cuti = Cuti::find($id);
+        $karyawan = Karyawan::all();
+        // dd($cuti);
+        return view('cuti.edit', compact('cuti', 'karyawan'));
     }
 
     /**

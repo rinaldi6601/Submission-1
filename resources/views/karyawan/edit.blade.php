@@ -25,16 +25,10 @@
                 <label for="alamat">Alamat</label>
             </div>
             <div class="row mb-3">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-floating mb-3 mb-md-0">
                         <input class="form-control" value="{{ $karyawan->tgl_lahir }}" name="tgl_lahir" id="tgl_lahir" type="date" placeholder="Masukkan Tanggal Lahir" />
                         <label for="tgl_lahir">Tanggal Lahir</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-floating mb-3 mb-md-0">
-                        <input class="form-control" value="{{ $karyawan->created_at }}" name="created_at" id="created_at" type="date" placeholder="Masukkan Tanggal Bergabung" />
-                        <label for="created_at">Tanggal Bergabung</label>
                     </div>
                 </div>
             </div>
